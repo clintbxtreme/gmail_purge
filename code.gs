@@ -11,6 +11,7 @@ function Intialize() {
 }
 
 function Install() {
+  Uninstall();
 
   ScriptApp.newTrigger("purgeGmail")
            .timeBased()
@@ -57,14 +58,10 @@ function purgeGmail() {
     console.log("done removing " + deleted + " emails")
     
     if (threads.length == 100) {
-      ScriptApp.newTrigger("purgeGmail")
-               .timeBased()
-               .at(new Date())
-               .create();
+      Install();
     }
     
   } catch (e) {
     console.log(e)
   }
-  
 }
